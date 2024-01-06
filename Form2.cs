@@ -39,9 +39,9 @@ namespace HariboteShortcut
 
         private void cfg_ref(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (cfgdialog.ShowDialog() == DialogResult.OK)
             {
-                cfg_ref(openFileDialog1.FileName);
+                cfg_ref(cfgdialog.FileName);
             }
         }
         private void cfg_ref(string fp)
@@ -92,7 +92,9 @@ namespace HariboteShortcut
 
         private void slist_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (slist.SelectedItems.Count == 0) return;
             isDontSave = true;
+            sn.Text = ((Liststr)slist.SelectedItem).c.ShortcutName;
             fpi.Text = ((Liststr)slist.SelectedItem).c.FileName;
             ari.Text = ((Liststr)slist.SelectedItem).c.Arguments;
             isDontSave = false;
@@ -101,7 +103,7 @@ namespace HariboteShortcut
         private void propc(object sender, EventArgs e)
         {
             if (isDontSave) return;
-            if(slist.SelectedItem != null)
+            if(slist.SelectedItems.Count != 0)
             {
                 ((Liststr)slist.SelectedItem).c.FileName = fpi.Text;
                 ((Liststr)slist.SelectedItem).c.Arguments = ari.Text;
@@ -114,6 +116,49 @@ namespace HariboteShortcut
                 var fs = new FileStream(stg.settingPath, FileMode.Create);
                 xs.Serialize(fs, ret);
                 fs.Close();
+            }
+        }
+
+        private void add(object sender, EventArgs e)
+        {
+            foreach(var r in slist.Items)
+            {
+                if(ns.Text == ((Liststr)r).c.ShortcutName)
+                {
+                    MessageBox.Show("同じショートカット名の\nショートカットがあります。");
+                    return;
+                }
+            }
+            if(ns.Text == string.Empty)
+            {
+                MessageBox.Show("ショートカット名は空にできません。");
+                return;
+            }
+            slist.Items.Add(new Liststr(new ShortcutData(ns.Text)));
+            ns.Text = string.Empty;
+        }
+
+        private void fr(object sender, EventArgs e)
+        {
+            if(DialogResult.OK == scfpi.ShowDialog())
+            {
+                fpi.Text = scfpi.FileName;
+            }
+        }
+
+        private void del(object sender, EventArgs e)
+        {
+
+            if (slist.SelectedItems.Count != 0)
+            {
+                string sname = ((Liststr)slist.SelectedItem).c.ShortcutName;
+                foreach(Liststr r in slist.Items)
+                {
+                    if(sname == r.c.ShortcutName)
+                    {
+                        slist.Items.Remove(r);
+                    }
+                }
             }
         }
     }

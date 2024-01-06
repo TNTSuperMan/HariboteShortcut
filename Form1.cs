@@ -105,7 +105,7 @@ namespace HariboteShortcut
         public string FileName;
         public string Arguments;
         public string ShortcutName;
-        public ShortcutData(string fileName, string arguments, string shortcutName)
+        public ShortcutData(string shortcutName,string fileName = "", string arguments = "")
         {
             FileName = fileName;
             Arguments = arguments;
