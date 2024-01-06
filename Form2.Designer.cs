@@ -40,6 +40,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.ns = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // slist
@@ -132,16 +133,26 @@
             // 
             // ns
             // 
-            this.ns.Location = new System.Drawing.Point(267, 216);
+            this.ns.Location = new System.Drawing.Point(12, 257);
             this.ns.Name = "ns";
             this.ns.Size = new System.Drawing.Size(191, 19);
             this.ns.TabIndex = 10;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(344, 216);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(37, 19);
+            this.button2.TabIndex = 11;
+            this.button2.Text = "参照";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(724, 450);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.ns);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -155,7 +166,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form2";
             this.Text = "はりぼてショートカット設定画面";
-            this.Load += new System.EventHandler(this.load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -174,5 +184,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox ns;
+        private System.Windows.Forms.Button button2;
     }
 }

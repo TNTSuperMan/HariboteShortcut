@@ -29,10 +29,7 @@ namespace HariboteShortcut
         Properties.Settings stg;
         List<ShortcutData> sd;
         Type stype = typeof(List<ShortcutData>);
-
-        private void load(object sender, EventArgs e)
-        {
-        }
+        bool isDontSave = false;
 
         private void cfgpath_TextChanged(object sender, EventArgs e)
         {
@@ -95,12 +92,15 @@ namespace HariboteShortcut
 
         private void slist_SelectedIndexChanged(object sender, EventArgs e)
         {
+            isDontSave = true;
             fpi.Text = ((Liststr)slist.SelectedItem).c.FileName;
             ari.Text = ((Liststr)slist.SelectedItem).c.Arguments;
+            isDontSave = false;
         }
 
         private void propc(object sender, EventArgs e)
         {
+            if (isDontSave) return;
             if(slist.SelectedItem != null)
             {
                 ((Liststr)slist.SelectedItem).c.FileName = fpi.Text;
