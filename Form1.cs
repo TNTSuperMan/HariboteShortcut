@@ -30,11 +30,11 @@ namespace HariboteShortcut
                 {
                     sd = (List<ShortcutData>)xs.Deserialize(reader);
                 }
-                catch(Exception e)
+                catch
                 {
                     MessageBox.Show("ショートカット設定ファイルの読込に失敗しました。\n" +
                                     "別の設定ファイルを試すか、新規作成してください。");
-                    MessageBox.Show("エラーメッセージ：" + e.Message);
+                    //MessageBox.Show("エラーメッセージ：" + e.Message);
                     return;
                 }
                 reader.Close();
@@ -49,6 +49,7 @@ namespace HariboteShortcut
                 MessageBox.Show("ショートカット設定ファイルがありません。\n" +
                                 "読み込むか、新規作成してください。");
             }
+            TopMost = true;
         }
         Type sdtype = typeof(List<ShortcutData>);
         Properties.Settings cfg;
@@ -96,7 +97,7 @@ namespace HariboteShortcut
 
         private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
         {
-            this.Focus();
+            Focus();
         }
     }
     [Serializable]
