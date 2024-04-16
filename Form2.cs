@@ -107,16 +107,21 @@ namespace HariboteShortcut
             {
                 ((Liststr)slist.SelectedItem).c.FileName = fpi.Text;
                 ((Liststr)slist.SelectedItem).c.Arguments = ari.Text;
-                List<ShortcutData> ret = new List<ShortcutData>();
-                foreach(Liststr r in slist.Items)
-                {
-                    ret.Add(r.c);
-                }
-                var xs = new XmlSerializer(stype);
-                var fs = new FileStream(stg.settingPath, FileMode.Create);
-                xs.Serialize(fs, ret);
-                fs.Close();
+                save();
             }
+        }
+        private void save()
+        {
+            if (isDontSave) return;
+            List<ShortcutData> ret = new List<ShortcutData>();
+            foreach (Liststr r in slist.Items)
+            {
+                ret.Add(r.c);
+            }
+            var xs = new XmlSerializer(stype);
+            var fs = new FileStream(stg.settingPath, FileMode.Create);
+            xs.Serialize(fs, ret);
+            fs.Close();
         }
 
         private void add(object sender, EventArgs e)
@@ -151,14 +156,8 @@ namespace HariboteShortcut
 
             if (slist.SelectedItems.Count != 0)
             {
-                string sname = ((Liststr)slist.SelectedItem).c.ShortcutName;
-                foreach(Liststr r in slist.Items)
-                {
-                    if(sname == r.c.ShortcutName)
-                    {
-                        slist.Items.Remove(r);
-                    }
-                }
+                slist.Items.RemoveAt(slist.SelectedIndex);
+                save();
             }
         }
     }
