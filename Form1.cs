@@ -75,6 +75,7 @@ namespace HariboteShortcut
                         p.StartInfo.FileName = row.FileName;
                         p.StartInfo.Arguments = row.Arguments;
                         p.Start();
+                        sid.Text = "";
                     }
                     catch
                     {
